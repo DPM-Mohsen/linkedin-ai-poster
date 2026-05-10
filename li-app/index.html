@@ -14,7 +14,7 @@ body{font-family:'DM Sans',sans-serif;background:#0d0d14;color:#e2e2ee;min-heigh
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#0d0d14}::-webkit-scrollbar-thumb{background:#1e1e32;border-radius:4px}
 input[type=date]::-webkit-calendar-picker-indicator,input[type=time]::-webkit-calendar-picker-indicator{filter:invert(0.4)}
 select option{background:#11111c}
-
+ 
 /* HEADER */
 .header{background:linear-gradient(135deg,#0f0f1a,#0d1a2e);border-bottom:1px solid #1e1e32;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:10px}
@@ -23,17 +23,17 @@ select option{background:#11111c}
 .logo-sub{font-size:0.62rem;color:#5a5a7a}
 .badge{display:flex;align-items:center;gap:5px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);border-radius:20px;padding:4px 10px;font-size:0.68rem;color:#34d399;font-weight:600}
 .dot{width:6px;height:6px;border-radius:50%;background:#34d399;animation:pulse 2s infinite}
-
+ 
 /* NAV */
 .nav{display:flex;background:#0d0d14;border-bottom:1px solid #1e1e32;position:sticky;top:58px;z-index:99}
 .nav-btn{flex:1;padding:10px 4px;text-align:center;font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#4a4a6a;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;position:relative}
 .nav-btn.active{color:#4f8ef7;border-bottom-color:#4f8ef7}
 .nav-badge{position:absolute;top:6px;right:calc(50% - 22px);background:#4f8ef7;color:white;border-radius:50%;width:14px;height:14px;font-size:0.58rem;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
-
+ 
 /* PANELS */
 .panel{max-width:720px;margin:0 auto;padding:20px;display:none}
 .panel.active{display:block}
-
+ 
 /* FORM */
 .field{margin-bottom:14px}
 label{display:block;font-size:0.68rem;color:#5a5a7a;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px}
@@ -41,13 +41,13 @@ textarea,select,input[type=text],input[type=url],input[type=date],input[type=tim
 textarea{resize:vertical;line-height:1.5}
 textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
+ 
 /* TAGS */
 .tags{display:flex;flex-wrap:wrap;gap:5px}
 .tag{padding:4px 11px;border-radius:20px;font-size:0.72rem;font-weight:600;border:1px solid #1e1e32;background:#11111c;color:#5a5a7a;cursor:pointer;transition:all 0.15s;user-select:none}
 .tag.sm{padding:3px 9px;font-size:0.68rem}
 .tag.active{border-color:#4f8ef7;background:rgba(79,142,247,0.12);color:#4f8ef7}
-
+ 
 /* BUTTONS */
 .btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,#4f8ef7,#7c5ff7);border:none;border-radius:9px;font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:white;cursor:pointer;margin-top:6px;transition:opacity 0.2s}
 .btn-primary:disabled{opacity:0.5;cursor:not-allowed}
@@ -59,13 +59,13 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
 .btn-purple{padding:5px 10px;border-radius:6px;font-size:0.68rem;font-weight:600;border:1px solid rgba(167,139,250,0.3);background:rgba(167,139,250,0.1);color:#a78bfa;cursor:pointer;font-family:'Syne',sans-serif}
 .btn-green{padding:5px 10px;border-radius:6px;font-size:0.68rem;font-weight:700;border:1px solid #34d399;background:rgba(52,211,153,0.2);color:#34d399;cursor:pointer;font-family:'Syne',sans-serif}
 .btn-red{padding:5px 10px;border-radius:6px;font-size:0.68rem;font-weight:600;border:1px solid rgba(248,113,113,0.3);background:rgba(248,113,113,0.1);color:#f87171;cursor:pointer;font-family:'Syne',sans-serif}
-
+ 
 /* LOADING */
 .loading{display:none;align-items:center;gap:8px;padding:10px 0;color:#4f8ef7;font-size:0.8rem}
 .loading.show{display:flex}
 .spinner{width:16px;height:16px;border:2px solid rgba(79,142,247,0.2);border-top-color:#4f8ef7;border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
 .spinner-w{width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
-
+ 
 /* OUTPUT */
 .out-wrap{margin-top:14px;background:#11111c;border:1px solid #1e1e32;border-radius:10px;overflow:hidden;display:none}
 .out-wrap.show{display:block}
@@ -78,7 +78,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
 .ver-bar{display:flex;gap:5px;padding:8px 12px 0}
 .ver-btn{padding:2px 9px;border-radius:10px;font-size:0.65rem;font-weight:700;border:1px solid #1e1e32;background:#1a1a28;color:#5a5a7a;cursor:pointer;font-family:'Syne',sans-serif}
 .ver-btn.active{border-color:#a78bfa;background:rgba(167,139,250,0.12);color:#a78bfa}
-
+ 
 /* CARDS */
 .card{background:#11111c;border:1px solid #1e1e32;border-radius:10px;padding:13px 14px;margin-bottom:10px}
 .card.scheduled{border-color:rgba(79,142,247,0.35)}
@@ -98,7 +98,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
 .reschedule-box{background:rgba(79,142,247,0.05);border:1px solid #1e1e32;border-radius:8px;padding:10px}
 .empty{text-align:center;padding:50px 20px;color:#3a3a5a}
 .backlog-stats{display:flex;gap:10px;font-size:0.7rem;color:#5a5a7a}
-
+ 
 /* PREVIEW */
 .preview-card{background:white;border-radius:12px;padding:18px;margin-bottom:12px}
 .preview-author{display:flex;align-items:center;gap:10px;margin-bottom:14px}
@@ -106,21 +106,21 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
 .preview-text{white-space:pre-wrap;color:#333;font-size:0.88rem;line-height:1.7}
 .preview-actions{margin-top:12px;padding-top:10px;border-top:1px solid #eee;display:flex;gap:16px}
 .preview-action{font-size:0.75rem;color:#666;font-weight:600}
-
+ 
 /* TOAST */
 .toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;padding:11px 20px;border-radius:10px;color:white;font-weight:700;font-size:0.85rem;box-shadow:0 4px 30px rgba(0,0,0,0.5);animation:fadeDown 0.25s ease;display:none;max-width:90%;text-align:center}
 .toast.show{display:block}
-
+ 
 /* WARN BOX */
 .warn-box{background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.12);border-radius:8px;padding:10px;font-size:0.72rem;color:#8a7a5a;line-height:1.6;margin-top:8px}
-
+ 
 @media(max-width:500px){.grid2{grid-template-columns:1fr}.card-acts{margin-top:8px}}
 </style>
 </head>
 <body>
-
+ 
 <div id="toast" class="toast"></div>
-
+ 
 <!-- HEADER -->
 <div class="header">
   <div class="logo">
@@ -132,7 +132,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
   </div>
   <div class="badge"><div class="dot"></div> Live</div>
 </div>
-
+ 
 <!-- NAV -->
 <div class="nav">
   <div class="nav-btn active" onclick="switchTab('backlog',this)" id="navBacklog">
@@ -142,7 +142,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
   <div class="nav-btn" onclick="switchTab('generate',this)">✦ Generate</div>
   <div class="nav-btn" onclick="switchTab('preview',this)">◈ Preview</div>
 </div>
-
+ 
 <!-- ═══ BACKLOG TAB ═══ -->
 <div id="tab-backlog" class="panel active">
   <div class="sec-title">+ New Topic</div>
@@ -173,7 +173,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
     </div>
     <button class="btn-primary" id="addBtn" onclick="addToBacklog()">+ Add to Backlog</button>
   </div>
-
+ 
   <hr class="divider">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
     <div class="sec-title" style="margin:0">Your Backlog & Queue</div>
@@ -184,7 +184,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
   </div>
   <div class="warn-box">⏰ Scheduled posts auto-send while this page is open. Keep the tab open at the scheduled time for auto-posting to work.</div>
 </div>
-
+ 
 <!-- ═══ GENERATE TAB ═══ -->
 <div id="tab-generate" class="panel">
   <div class="field">
@@ -224,7 +224,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
   </div>
   <button class="btn-primary" id="genBtn" onclick="generate(false)">✦ Generate with Claude</button>
   <div class="loading" id="loading"><div class="spinner"></div><span id="loadingMsg">Claude is writing your post...</span></div>
-
+ 
   <div class="out-wrap" id="outWrap">
     <div class="ver-bar" id="verBar"></div>
     <div class="out-hdr">
@@ -240,7 +240,7 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
     <div class="out-actions" id="postActions"></div>
   </div>
 </div>
-
+ 
 <!-- ═══ PREVIEW TAB ═══ -->
 <div id="tab-preview" class="panel">
   <div id="previewEmpty" class="empty">
@@ -268,15 +268,15 @@ textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
     <div id="previewPostActions"></div>
   </div>
 </div>
-
+ 
 <script>
 // ─── CONFIG ───
 const TONES = ["Thought leadership","Storytelling","Educational","Conversational","Data-driven"];
 const HOOKS = ["Bold statement","Question","Controversial take","Personal story","Stat/Data"];
 const LOADING_MSGS = ["Claude is writing your post...","Nailing the hook...","Adding that PM edge...","Polishing the punchline...","Almost done..."];
-const STATUS_COLOR = { pending:"#fbbf24", scheduled:"#4f8ef7", sent:"#34d399", failed:"#f87171", done:"#34d399" };
+const STATUS_COLOR = { pending:"#fbbf24", scheduled:"#4f8ef7", sent:"#34d399", failed:"#f87171", done:"#34d399", posted:"#34d399" };
 const TODAY = new Date().toISOString().split("T")[0];
-
+ 
 // ─── STATE ───
 let currentTone = "Thought leadership";
 let currentHook = "Bold statement";
@@ -288,7 +288,7 @@ let backlog = JSON.parse(localStorage.getItem("li_backlog_v3") || "[]");
 let loadingInterval = null;
 let expandedId = null;
 let generatingId = null;
-
+ 
 // ─── INIT ───
 function init() {
   renderTags("toneGroup", TONES, currentTone, v => { currentTone = v; renderTags("toneGroup", TONES, currentTone, arguments.callee); });
@@ -298,14 +298,14 @@ function init() {
   renderBacklog();
   startScheduleTimer();
 }
-
+ 
 function renderTags(id, options, current, onChange, small) {
   const el = document.getElementById(id);
   el.innerHTML = options.map(o =>
     `<div class="tag${small?' sm':''}${o===current?' active':''}" onclick="(${onChange.toString()})('${o}')">${o}</div>`
   ).join('');
 }
-
+ 
 // ─── TABS ───
 function switchTab(name, el) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -314,7 +314,7 @@ function switchTab(name, el) {
   document.getElementById('tab-' + name).classList.add('active');
   if (name === 'preview') renderPreview();
 }
-
+ 
 // ─── TOAST ───
 function showToast(msg, type="success") {
   const t = document.getElementById("toast");
@@ -323,7 +323,7 @@ function showToast(msg, type="success") {
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 4000);
 }
-
+ 
 // ─── LOADING ───
 function startLoading() {
   document.getElementById("loading").classList.add("show");
@@ -334,18 +334,18 @@ function startLoading() {
     document.getElementById("loadingMsg").textContent = LOADING_MSGS[i];
   }, 1600);
 }
-
+ 
 function stopLoading() {
   document.getElementById("loading").classList.remove("show");
   document.getElementById("genBtn").disabled = false;
   clearInterval(loadingInterval);
 }
-
+ 
 // ─── GENERATE ───
 async function generate(addVersion) {
   const topic = document.getElementById("topic").value.trim();
   if (!topic) { showToast("Please enter a topic first.", "error"); return; }
-
+ 
   startLoading();
   try {
     const res = await fetch("/api/generate", {
@@ -360,15 +360,15 @@ async function generate(addVersion) {
     });
     const data = await res.json();
     if (data.error) throw new Error(data.error);
-
+ 
     if (addVersion) { versions.push(data.post); currentVer = versions.length - 1; }
     else { versions = [data.post]; currentVer = 0; }
-
+ 
     showOutput();
   } catch(e) { showToast("❌ Error: " + e.message, "error"); }
   finally { stopLoading(); }
 }
-
+ 
 async function improve() {
   const text = document.getElementById("outBody").innerText.trim();
   if (!text) return;
@@ -386,7 +386,7 @@ async function improve() {
   } catch(e) { showToast("❌ Error: " + e.message, "error"); }
   finally { stopLoading(); }
 }
-
+ 
 function showOutput() {
   const wrap = document.getElementById("outWrap");
   wrap.classList.add("show");
@@ -401,19 +401,19 @@ function showOutput() {
   updateCount();
   renderPostActions("postActions");
 }
-
+ 
 function selectVer(i) {
   currentVer = i;
   showOutput();
 }
-
+ 
 function updateCount() {
   const n = document.getElementById("outBody").innerText.length;
   const el = document.getElementById("charCount");
   el.textContent = n + " chars";
   el.style.color = n > 3000 ? "#f87171" : n > 2500 ? "#fbbf24" : "#3a3a5a";
 }
-
+ 
 function copyPost() {
   const text = document.getElementById("outBody").innerText;
   if (!text) { showToast("No post to copy!", "error"); return; }
@@ -426,7 +426,7 @@ function copyPost() {
     setTimeout(() => { btn.textContent = "⧉ Copy"; btn.style.color = ""; btn.style.borderColor = ""; }, 2000);
   });
 }
-
+ 
 // ─── POST TO LINKEDIN ───
 function renderPostActions(containerId) {
   const el = document.getElementById(containerId);
@@ -436,15 +436,15 @@ function renderPostActions(containerId) {
       Post to LinkedIn Now
     </button>`;
 }
-
+ 
 async function postToLinkedIn(containerId) {
   const text = document.getElementById("outBody")?.innerText || document.getElementById("previewText")?.innerText || "";
   if (!text.trim()) { showToast("No post content!", "error"); return; }
-
+ 
   const btn = document.getElementById("postBtn-" + containerId);
   if (btn) { btn.disabled = true; btn.innerHTML = '<div class="spinner-w"></div> Posting...'; }
   showToast("📤 Sending to LinkedIn...", "info");
-
+ 
   try {
     const res = await fetch("/api/post", {
       method: "POST",
@@ -453,7 +453,7 @@ async function postToLinkedIn(containerId) {
     });
     const data = await res.json();
     if (data.error) throw new Error(data.error);
-
+ 
     const container = document.getElementById(containerId);
     container.innerHTML = '<div class="btn-sent">✅ Posted to LinkedIn! Check your profile.</div>';
     showToast("✅ Posted to LinkedIn successfully!", "success");
@@ -462,7 +462,7 @@ async function postToLinkedIn(containerId) {
     showToast("❌ Failed: " + e.message, "error");
   }
 }
-
+ 
 // ─── PREVIEW ───
 function renderPreview() {
   const text = document.getElementById("outBody")?.innerText || "";
@@ -476,20 +476,20 @@ function renderPreview() {
     document.getElementById("previewContent").style.display = "none";
   }
 }
-
+ 
 // ─── BACKLOG ───
 function saveBacklog() {
   localStorage.setItem("li_backlog_v3", JSON.stringify(backlog));
   renderBacklog();
 }
-
+ 
 function updateSchedPreview() {
   const d = document.getElementById("newDate").value;
   const t = document.getElementById("newTime").value;
   const el = document.getElementById("schedPreview");
   el.textContent = d ? `📅 Will auto-post on ${fmtDate(new Date(d + "T" + t).toISOString())}` : "";
 }
-
+ 
 function addToBacklog() {
   const topic = document.getElementById("newTopic").value.trim();
   if (!topic) { showToast("Please enter a topic.", "error"); return; }
@@ -511,13 +511,13 @@ function addToBacklog() {
   document.getElementById("schedPreview").textContent = "";
   showToast(date ? `📅 Scheduled for ${fmtDate(item.scheduleAt)}` : "📋 Added to backlog!", "success");
 }
-
+ 
 async function generateFromBacklog(id) {
   const item = backlog.find(b => b.id === id);
   if (!item) return;
   generatingId = id;
   renderBacklog();
-
+ 
   // Switch to generate tab and pre-fill
   document.getElementById("topic").value = item.topic;
   currentTone = item.tone;
@@ -528,7 +528,7 @@ async function generateFromBacklog(id) {
   document.querySelectorAll('.nav-btn')[1].classList.add('active');
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-generate').classList.add('active');
-
+ 
   startLoading();
   try {
     const res = await fetch("/api/generate", {
@@ -538,26 +538,26 @@ async function generateFromBacklog(id) {
     });
     const data = await res.json();
     if (data.error) throw new Error(data.error);
-
+ 
     versions = [data.post]; currentVer = 0;
     showOutput();
-
+ 
     // Save back to backlog
     const idx = backlog.findIndex(b => b.id === id);
     if (idx >= 0) {
       backlog[idx].generatedPost = data.post;
       if (backlog[idx].scheduleAt) backlog[idx].status = "scheduled";
-      else backlog[idx].status = "done";
+      else backlog[idx].status = "posted";
       saveBacklog();
     }
   } catch(e) { showToast("❌ Error: " + e.message, "error"); }
   finally { generatingId = null; stopLoading(); renderBacklog(); }
 }
-
+ 
 async function sendNow(id, isOverride) {
   const item = backlog.find(b => b.id === id);
   if (!item) return;
-
+ 
   let text = item.generatedPost;
   if (!text) {
     showToast("✦ Generating post first...", "info");
@@ -574,10 +574,10 @@ async function sendNow(id, isOverride) {
       if (idx >= 0) backlog[idx].generatedPost = text;
     } catch(e) { showToast("❌ Generate failed: " + e.message, "error"); return; }
   }
-
+ 
   if (isOverride) showToast("📤 Overriding schedule — sending now...", "info");
   else showToast("📤 Sending to LinkedIn...", "info");
-
+ 
   try {
     const res = await fetch("/api/post", {
       method: "POST",
@@ -586,24 +586,24 @@ async function sendNow(id, isOverride) {
     });
     const data = await res.json();
     if (data.error) throw new Error(data.error);
-
+ 
     const idx = backlog.findIndex(b => b.id === id);
-    if (idx >= 0) { backlog[idx].status = "sent"; backlog[idx].generatedPost = text; }
+    if (idx >= 0) { backlog[idx].status = "posted"; backlog[idx].generatedPost = text; }
     saveBacklog();
     showToast(isOverride ? "✅ Sent! Schedule cancelled." : "✅ Posted to LinkedIn!", "success");
   } catch(e) { showToast("❌ Send failed: " + e.message, "error"); }
 }
-
+ 
 function deleteItem(id) {
   backlog = backlog.filter(b => b.id !== id);
   saveBacklog();
 }
-
+ 
 function toggleExpand(id) {
   expandedId = expandedId === id ? null : id;
   renderBacklog();
 }
-
+ 
 function updateSchedule(id, date, time) {
   const idx = backlog.findIndex(b => b.id === id);
   if (idx < 0) return;
@@ -611,38 +611,38 @@ function updateSchedule(id, date, time) {
   backlog[idx].status = date ? (backlog[idx].generatedPost ? "scheduled" : "pending") : "pending";
   saveBacklog();
 }
-
+ 
 function renderBacklog() {
   const pending = backlog.filter(b => b.status === "pending").length;
   const scheduled = backlog.filter(b => b.status === "scheduled").length;
-  const done = backlog.filter(b => b.status === "sent" || b.status === "done").length;
-
+  const done = backlog.filter(b => b.status === "sent" || b.status === "done" || b.status === "posted").length;
+ 
   // Badge
   const total = pending + scheduled;
   const badge = document.getElementById("backlogBadge");
   badge.style.display = total > 0 ? "inline-flex" : "none";
   badge.textContent = total;
-
+ 
   // Stats
   document.getElementById("backlogStats").innerHTML =
-    `<span>📋 ${pending} pending</span><span>📅 ${scheduled} scheduled</span><span>✅ ${done} done</span>`;
-
+    `<span>📋 ${pending} pending</span><span>📅 ${scheduled} scheduled</span><span>✅ ${done} posted</span>`;
+ 
   // Update add button label
   const addBtn = document.getElementById("addBtn");
   if (addBtn) addBtn.textContent = document.getElementById("newDate")?.value ? "📅 Add & Schedule" : "+ Add to Backlog";
-
+ 
   if (backlog.length === 0) {
     document.getElementById("backlogList").innerHTML = '<div class="empty"><div style="font-size:2rem;margin-bottom:8px">📋</div><div>No topics yet — add your first idea above!</div></div>';
     return;
   }
-
+ 
   document.getElementById("backlogList").innerHTML = backlog.map(item => {
-    const isDone = item.status === "sent" || item.status === "done";
+    const isDone = item.status === "sent" || item.status === "done" || item.status === "posted";
     const isExpanded = expandedId === item.id;
     const isGenerating = generatingId === item.id;
     const pillColor = STATUS_COLOR[item.status] || "#666";
     const isScheduled = item.status === "scheduled";
-
+ 
     return `
       <div class="card ${isScheduled?'scheduled':''} ${isDone?'done':''}">
         <div class="card-head">
@@ -659,7 +659,7 @@ function renderBacklog() {
             ${!isDone ? `<button class="btn-purple" onclick="generateFromBacklog(${item.id})" ${isGenerating?'disabled':''}>
               ${isGenerating ? '...' : '✦ Generate'}
             </button>` : ""}
-            ${item.status !== "sent" && item.status !== "done" ? `
+            ${item.status !== "sent" && item.status !== "done" && item.status !== "posted" ? `
               <button class="btn-green" onclick="sendNow(${item.id}, ${isScheduled})" style="${isScheduled?'border-color:#34d399;font-weight:700':''}">
                 ${isScheduled ? '▶ Send now (override)' : '▶ Send now'}
               </button>` : ""}
@@ -691,7 +691,7 @@ function renderBacklog() {
       </div>`;
   }).join('');
 }
-
+ 
 // ─── SCHEDULE TIMER ───
 function startScheduleTimer() {
   setInterval(async () => {
@@ -701,24 +701,24 @@ function startScheduleTimer() {
       if (item.status === "scheduled" && item.generatedPost && new Date(item.scheduleAt) <= now) {
         try {
           await fetch("/api/post", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: item.generatedPost }) });
-          item.status = "sent"; changed = true;
+          item.status = "posted"; changed = true;
         } catch { item.status = "failed"; changed = true; }
       }
     }
     if (changed) { saveBacklog(); showToast("📬 Scheduled post sent to LinkedIn!", "success"); }
   }, 60000);
 }
-
+ 
 // ─── UTILS ───
 function fmtDate(iso) {
   const d = new Date(iso);
   return d.toLocaleDateString("en-US", {month:"short",day:"numeric"}) + " " + d.toLocaleTimeString("en-US", {hour:"2-digit",minute:"2-digit"});
 }
-
+ 
 function escHtml(str) {
   return (str||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
-
+ 
 init();
 </script>
 </body>

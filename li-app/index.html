@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn AI Poster</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeDown{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+body{font-family:'DM Sans',sans-serif;background:#0d0d14;color:#e2e2ee;min-height:100vh;font-size:14px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#0d0d14}::-webkit-scrollbar-thumb{background:#1e1e32;border-radius:4px}
+input[type=date]::-webkit-calendar-picker-indicator,input[type=time]::-webkit-calendar-picker-indicator{filter:invert(0.4)}
+select option{background:#11111c}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#0f0f1a,#0d1a2e);border-bottom:1px solid #1e1e32;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#0A66C2,#4f8ef7);display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-size:13px;font-family:'Syne',sans-serif}
+.logo-text{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800}
+.logo-sub{font-size:0.62rem;color:#5a5a7a}
+.badge{display:flex;align-items:center;gap:5px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);border-radius:20px;padding:4px 10px;font-size:0.68rem;color:#34d399;font-weight:600}
+.dot{width:6px;height:6px;border-radius:50%;background:#34d399;animation:pulse 2s infinite}
+
+/* NAV */
+.nav{display:flex;background:#0d0d14;border-bottom:1px solid #1e1e32;position:sticky;top:58px;z-index:99}
+.nav-btn{flex:1;padding:10px 4px;text-align:center;font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#4a4a6a;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;position:relative}
+.nav-btn.active{color:#4f8ef7;border-bottom-color:#4f8ef7}
+.nav-badge{position:absolute;top:6px;right:calc(50% - 22px);background:#4f8ef7;color:white;border-radius:50%;width:14px;height:14px;font-size:0.58rem;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+
+/* PANELS */
+.panel{max-width:720px;margin:0 auto;padding:20px;display:none}
+.panel.active{display:block}
+
+/* FORM */
+.field{margin-bottom:14px}
+label{display:block;font-size:0.68rem;color:#5a5a7a;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px}
+textarea,select,input[type=text],input[type=url],input[type=date],input[type=time]{width:100%;background:#11111c;border:1px solid #1e1e32;border-radius:8px;color:#e2e2ee;font-family:inherit;font-size:0.85rem;padding:9px 12px;outline:none;transition:border-color 0.2s}
+textarea{resize:vertical;line-height:1.5}
+textarea:focus,select:focus,input:focus{border-color:#4f8ef7}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{padding:4px 11px;border-radius:20px;font-size:0.72rem;font-weight:600;border:1px solid #1e1e32;background:#11111c;color:#5a5a7a;cursor:pointer;transition:all 0.15s;user-select:none}
+.tag.sm{padding:3px 9px;font-size:0.68rem}
+.tag.active{border-color:#4f8ef7;background:rgba(79,142,247,0.12);color:#4f8ef7}
+
+/* BUTTONS */
+.btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,#4f8ef7,#7c5ff7);border:none;border-radius:9px;font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:white;cursor:pointer;margin-top:6px;transition:opacity 0.2s}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed}
+.btn-li{width:100%;padding:12px;background:linear-gradient(135deg,#0A66C2,#0855a8);border:none;border-radius:9px;font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}
+.btn-li:disabled{opacity:0.6}
+.btn-sent{width:100%;padding:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);border-radius:9px;font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:#34d399;text-align:center;margin-top:10px}
+.btn-sm{padding:5px 10px;border-radius:6px;font-size:0.68rem;font-weight:600;border:1px solid #1e1e32;background:#1a1a28;color:#8a8aaa;cursor:pointer;font-family:'Syne',sans-serif}
+.btn-sm:hover{border-color:#4f8ef7;color:#4f8ef7}
+.btn-purple{padding:5px 10px;border-radius:6px;font-size:0.68rem;font-weight:600;border:1px solid rgba(167,139,250,0.3);background:rgba(167,139,250,0.1);color:#a78bfa;cursor:pointer;font-family:'Syne',sans-serif}
+.btn-green{padding:5px 10px;border-radius:6px;font-size:0.68rem;font-weight:700;border:1px solid #34d399;background:rgba(52,211,153,0.2);color:#34d399;cursor:pointer;font-family:'Syne',sans-serif}
+.btn-red{padding:5px 10px;border-radius:6px;font-size:0.68rem;font-weight:600;border:1px solid rgba(248,113,113,0.3);background:rgba(248,113,113,0.1);color:#f87171;cursor:pointer;font-family:'Syne',sans-serif}
+
+/* LOADING */
+.loading{display:none;align-items:center;gap:8px;padding:10px 0;color:#4f8ef7;font-size:0.8rem}
+.loading.show{display:flex}
+.spinner{width:16px;height:16px;border:2px solid rgba(79,142,247,0.2);border-top-color:#4f8ef7;border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
+.spinner-w{width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
+
+/* OUTPUT */
+.out-wrap{margin-top:14px;background:#11111c;border:1px solid #1e1e32;border-radius:10px;overflow:hidden;display:none}
+.out-wrap.show{display:block}
+.out-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #1e1e32;flex-wrap:wrap;gap:5px}
+.out-lbl{font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#5a5a7a}
+.out-acts{display:flex;gap:5px;flex-wrap:wrap}
+.out-body{padding:14px;font-size:0.88rem;line-height:1.8;white-space:pre-wrap;color:#d0d0e8;min-height:100px;max-height:300px;overflow-y:auto;outline:none}
+.out-foot{padding:6px 12px;border-top:1px solid #1e1e32;display:flex;justify-content:flex-end;font-size:0.65rem;color:#3a3a5a}
+.out-actions{padding:0 12px 12px}
+.ver-bar{display:flex;gap:5px;padding:8px 12px 0}
+.ver-btn{padding:2px 9px;border-radius:10px;font-size:0.65rem;font-weight:700;border:1px solid #1e1e32;background:#1a1a28;color:#5a5a7a;cursor:pointer;font-family:'Syne',sans-serif}
+.ver-btn.active{border-color:#a78bfa;background:rgba(167,139,250,0.12);color:#a78bfa}
+
+/* CARDS */
+.card{background:#11111c;border:1px solid #1e1e32;border-radius:10px;padding:13px 14px;margin-bottom:10px}
+.card.scheduled{border-color:rgba(79,142,247,0.35)}
+.card.done{opacity:0.55}
+.add-card{background:#0f0f1c;border:1px dashed #2a2a40;border-radius:10px;padding:14px;margin-bottom:14px}
+.sec-title{font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#5a5a7a;margin-bottom:10px}
+.divider{border:none;border-top:1px solid #1e1e32;margin:16px 0}
+.sched-box{background:rgba(79,142,247,0.05);border:1px solid #1e1e32;border-radius:8px;padding:12px;margin-bottom:12px}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.62rem;font-weight:700}
+.card-head{display:flex;align-items:flex-start;gap:8px}
+.card-acts{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.card-topic{font-size:0.85rem;color:#e2e2ee;font-weight:500;line-height:1.4;margin-bottom:5px;cursor:pointer}
+.card-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:0.65rem;color:#5a5a7a}
+.expanded{margin-top:10px;border-top:1px solid #1e1e32;padding-top:10px;display:none}
+.expanded.show{display:block}
+.generated-preview{background:#0d0d14;border-radius:8px;padding:10px;font-size:0.78rem;color:#c0c0d8;line-height:1.65;white-space:pre-wrap;max-height:150px;overflow-y:auto;margin-bottom:10px}
+.reschedule-box{background:rgba(79,142,247,0.05);border:1px solid #1e1e32;border-radius:8px;padding:10px}
+.empty{text-align:center;padding:50px 20px;color:#3a3a5a}
+.backlog-stats{display:flex;gap:10px;font-size:0.7rem;color:#5a5a7a}
+
+/* PREVIEW */
+.preview-card{background:white;border-radius:12px;padding:18px;margin-bottom:12px}
+.preview-author{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#0A66C2,#0099ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:0.95rem;flex-shrink:0}
+.preview-text{white-space:pre-wrap;color:#333;font-size:0.88rem;line-height:1.7}
+.preview-actions{margin-top:12px;padding-top:10px;border-top:1px solid #eee;display:flex;gap:16px}
+.preview-action{font-size:0.75rem;color:#666;font-weight:600}
+
+/* TOAST */
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;padding:11px 20px;border-radius:10px;color:white;font-weight:700;font-size:0.85rem;box-shadow:0 4px 30px rgba(0,0,0,0.5);animation:fadeDown 0.25s ease;display:none;max-width:90%;text-align:center}
+.toast.show{display:block}
+
+/* WARN BOX */
+.warn-box{background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.12);border-radius:8px;padding:10px;font-size:0.72rem;color:#8a7a5a;line-height:1.6;margin-top:8px}
+
+@media(max-width:500px){.grid2{grid-template-columns:1fr}.card-acts{margin-top:8px}}
+</style>
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">in</div>
+    <div>
+      <div class="logo-text">LinkedIn AI Poster</div>
+      <div class="logo-sub">Claude · Zapier · Mohsen Khorsand</div>
+    </div>
+  </div>
+  <div class="badge"><div class="dot"></div> Live</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-btn active" onclick="switchTab('backlog',this)" id="navBacklog">
+    📋 Backlog & Schedule
+    <span class="nav-badge" id="backlogBadge" style="display:none">0</span>
+  </div>
+  <div class="nav-btn" onclick="switchTab('generate',this)">✦ Generate</div>
+  <div class="nav-btn" onclick="switchTab('preview',this)">◈ Preview</div>
+</div>
+
+<!-- ═══ BACKLOG TAB ═══ -->
+<div id="tab-backlog" class="panel active">
+  <div class="sec-title">+ New Topic</div>
+  <div class="add-card">
+    <div class="field">
+      <label>Topic idea</label>
+      <textarea id="newTopic" rows="2" placeholder="e.g. How Agentforce is redefining the Salesforce PM role in 2026..."></textarea>
+    </div>
+    <div class="field">
+      <label>Tone</label>
+      <div class="tags" id="newToneGroup"></div>
+    </div>
+    <div class="field">
+      <label>Hook style</label>
+      <div class="tags" id="newHookGroup"></div>
+    </div>
+    <div class="sched-box">
+      <label style="color:#4f8ef7;margin-bottom:8px;display:block;font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.7px">📅 Schedule (optional)</label>
+      <div class="grid2">
+        <div><label>Date</label><input type="date" id="newDate" style="color-scheme:dark" onchange="updateSchedPreview()"></div>
+        <div><label>Time</label><input type="time" id="newTime" value="09:00" style="color-scheme:dark" onchange="updateSchedPreview()"></div>
+      </div>
+      <div id="schedPreview" style="font-size:0.7rem;color:#4f8ef7;margin-top:6px"></div>
+    </div>
+    <div class="field">
+      <label>Note (optional)</label>
+      <input type="text" id="newNote" placeholder="Source, deadline, campaign...">
+    </div>
+    <button class="btn-primary" id="addBtn" onclick="addToBacklog()">+ Add to Backlog</button>
+  </div>
+
+  <hr class="divider">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+    <div class="sec-title" style="margin:0">Your Backlog & Queue</div>
+    <div class="backlog-stats" id="backlogStats"></div>
+  </div>
+  <div id="backlogList">
+    <div class="empty"><div style="font-size:2rem;margin-bottom:8px">📋</div><div>No topics yet — add your first idea above!</div></div>
+  </div>
+  <div class="warn-box">⏰ Scheduled posts auto-send while this page is open. Keep the tab open at the scheduled time for auto-posting to work.</div>
+</div>
+
+<!-- ═══ GENERATE TAB ═══ -->
+<div id="tab-generate" class="panel">
+  <div class="field">
+    <label>What's this post about?</label>
+    <textarea id="topic" rows="3" placeholder="e.g. Why modern companies need a Salesforce PM — the role evolved from admin to AI orchestrator..."></textarea>
+  </div>
+  <div class="field">
+    <label>Tone</label>
+    <div class="tags" id="toneGroup"></div>
+  </div>
+  <div class="grid2 field">
+    <div>
+      <label>Length</label>
+      <select id="length">
+        <option value="short">Short (~150w)</option>
+        <option value="medium" selected>Medium (~250w)</option>
+        <option value="long">Long (~400w)</option>
+      </select>
+    </div>
+    <div>
+      <label>Hashtags</label>
+      <select id="hashtags">
+        <option value="3">3 hashtags</option>
+        <option value="5" selected>5 hashtags</option>
+        <option value="7">7 hashtags</option>
+        <option value="0">None</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label>Salesforce context (optional)</label>
+    <input type="text" id="sfctx" placeholder="e.g. Agentforce, Einstein AI, Spring '26 release...">
+  </div>
+  <div class="field">
+    <label>Hook style</label>
+    <div class="tags" id="hookGroup"></div>
+  </div>
+  <button class="btn-primary" id="genBtn" onclick="generate(false)">✦ Generate with Claude</button>
+  <div class="loading" id="loading"><div class="spinner"></div><span id="loadingMsg">Claude is writing your post...</span></div>
+
+  <div class="out-wrap" id="outWrap">
+    <div class="ver-bar" id="verBar"></div>
+    <div class="out-hdr">
+      <span class="out-lbl">Generated Post</span>
+      <div class="out-acts">
+        <button class="btn-sm" onclick="generate(true)">↺ New version</button>
+        <button class="btn-sm" onclick="improve()">✦ Improve</button>
+        <button class="btn-sm" id="copyBtn" onclick="copyPost()">⧉ Copy</button>
+      </div>
+    </div>
+    <div class="out-body" id="outBody" contenteditable="true" oninput="updateCount()"></div>
+    <div class="out-foot"><span id="charCount">0 chars</span></div>
+    <div class="out-actions" id="postActions"></div>
+  </div>
+</div>
+
+<!-- ═══ PREVIEW TAB ═══ -->
+<div id="tab-preview" class="panel">
+  <div id="previewEmpty" class="empty">
+    <div style="font-size:2.5rem;margin-bottom:10px">📝</div>
+    <div>Generate a post first, then preview it here.</div>
+  </div>
+  <div id="previewContent" style="display:none">
+    <div class="preview-card">
+      <div class="preview-author">
+        <div class="avatar">MK</div>
+        <div>
+          <div style="font-weight:700;color:#111;font-size:0.9rem">Mohsen Khorsand</div>
+          <div style="color:#666;font-size:0.75rem">Senior PM · Salesforce</div>
+          <div style="color:#999;font-size:0.68rem">Just now · 🌐</div>
+        </div>
+      </div>
+      <div class="preview-text" id="previewText"></div>
+      <div class="preview-actions">
+        <span class="preview-action">👍 Like</span>
+        <span class="preview-action">💬 Comment</span>
+        <span class="preview-action">🔄 Repost</span>
+        <span class="preview-action">✉️ Send</span>
+      </div>
+    </div>
+    <div id="previewPostActions"></div>
+  </div>
+</div>
+
+<script>
+// ─── CONFIG ───
+const TONES = ["Thought leadership","Storytelling","Educational","Conversational","Data-driven"];
+const HOOKS = ["Bold statement","Question","Controversial take","Personal story","Stat/Data"];
+const LOADING_MSGS = ["Claude is writing your post...","Nailing the hook...","Adding that PM edge...","Polishing the punchline...","Almost done..."];
+const STATUS_COLOR = { pending:"#fbbf24", scheduled:"#4f8ef7", sent:"#34d399", failed:"#f87171", done:"#34d399" };
+const TODAY = new Date().toISOString().split("T")[0];
+
+// ─── STATE ───
+let currentTone = "Thought leadership";
+let currentHook = "Bold statement";
+let newTone = "Thought leadership";
+let newHook = "Bold statement";
+let versions = [];
+let currentVer = 0;
+let backlog = JSON.parse(localStorage.getItem("li_backlog_v3") || "[]");
+let loadingInterval = null;
+let expandedId = null;
+let generatingId = null;
+
+// ─── INIT ───
+function init() {
+  renderTags("toneGroup", TONES, currentTone, v => { currentTone = v; renderTags("toneGroup", TONES, currentTone, arguments.callee); });
+  renderTags("hookGroup", HOOKS, currentHook, v => { currentHook = v; renderTags("hookGroup", HOOKS, currentHook, arguments.callee); });
+  renderTags("newToneGroup", TONES, newTone, v => { newTone = v; renderTags("newToneGroup", TONES, newTone, arguments.callee); }, true);
+  renderTags("newHookGroup", HOOKS, newHook, v => { newHook = v; renderTags("newHookGroup", HOOKS, newHook, arguments.callee); }, true);
+  renderBacklog();
+  startScheduleTimer();
+}
+
+function renderTags(id, options, current, onChange, small) {
+  const el = document.getElementById(id);
+  el.innerHTML = options.map(o =>
+    `<div class="tag${small?' sm':''}${o===current?' active':''}" onclick="(${onChange.toString()})('${o}')">${o}</div>`
+  ).join('');
+}
+
+// ─── TABS ───
+function switchTab(name, el) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'preview') renderPreview();
+}
+
+// ─── TOAST ───
+function showToast(msg, type="success") {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.style.background = type==="error" ? "rgba(248,113,113,0.97)" : type==="info" ? "rgba(79,142,247,0.97)" : "rgba(52,211,153,0.97)";
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 4000);
+}
+
+// ─── LOADING ───
+function startLoading() {
+  document.getElementById("loading").classList.add("show");
+  document.getElementById("genBtn").disabled = true;
+  let i = 0;
+  loadingInterval = setInterval(() => {
+    i = (i+1) % LOADING_MSGS.length;
+    document.getElementById("loadingMsg").textContent = LOADING_MSGS[i];
+  }, 1600);
+}
+
+function stopLoading() {
+  document.getElementById("loading").classList.remove("show");
+  document.getElementById("genBtn").disabled = false;
+  clearInterval(loadingInterval);
+}
+
+// ─── GENERATE ───
+async function generate(addVersion) {
+  const topic = document.getElementById("topic").value.trim();
+  if (!topic) { showToast("Please enter a topic first.", "error"); return; }
+
+  startLoading();
+  try {
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        topic, tone: currentTone, hook: currentHook,
+        length: document.getElementById("length").value,
+        hashtags: document.getElementById("hashtags").value,
+        sfctx: document.getElementById("sfctx").value.trim()
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    if (addVersion) { versions.push(data.post); currentVer = versions.length - 1; }
+    else { versions = [data.post]; currentVer = 0; }
+
+    showOutput();
+  } catch(e) { showToast("❌ Error: " + e.message, "error"); }
+  finally { stopLoading(); }
+}
+
+async function improve() {
+  const text = document.getElementById("outBody").innerText.trim();
+  if (!text) return;
+  startLoading();
+  try {
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic: `Improve this LinkedIn post. Sharpen the hook, tighten the flow, keep same length. Return only the improved post:\n\n${text}`, tone: currentTone, hook: currentHook, length: "medium", hashtags: "0", sfctx: "" })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    versions.push(data.post); currentVer = versions.length - 1;
+    showOutput();
+  } catch(e) { showToast("❌ Error: " + e.message, "error"); }
+  finally { stopLoading(); }
+}
+
+function showOutput() {
+  const wrap = document.getElementById("outWrap");
+  wrap.classList.add("show");
+  // Version bar
+  const bar = document.getElementById("verBar");
+  bar.style.display = versions.length > 1 ? "flex" : "none";
+  bar.innerHTML = versions.map((_,i) =>
+    `<div class="ver-btn${i===currentVer?' active':''}" onclick="selectVer(${i})">v${i+1}</div>`
+  ).join('');
+  // Post body
+  document.getElementById("outBody").innerText = versions[currentVer];
+  updateCount();
+  renderPostActions("postActions");
+}
+
+function selectVer(i) {
+  currentVer = i;
+  showOutput();
+}
+
+function updateCount() {
+  const n = document.getElementById("outBody").innerText.length;
+  const el = document.getElementById("charCount");
+  el.textContent = n + " chars";
+  el.style.color = n > 3000 ? "#f87171" : n > 2500 ? "#fbbf24" : "#3a3a5a";
+}
+
+function copyPost() {
+  const text = document.getElementById("outBody").innerText;
+  if (!text) { showToast("No post to copy!", "error"); return; }
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("copyBtn");
+    btn.textContent = "✓ Copied!";
+    btn.style.color = "#34d399";
+    btn.style.borderColor = "#34d399";
+    showToast("✅ Copied to clipboard!", "success");
+    setTimeout(() => { btn.textContent = "⧉ Copy"; btn.style.color = ""; btn.style.borderColor = ""; }, 2000);
+  });
+}
+
+// ─── POST TO LINKEDIN ───
+function renderPostActions(containerId) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = `
+    <button class="btn-li" id="postBtn-${containerId}" onclick="postToLinkedIn('${containerId}')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      Post to LinkedIn Now
+    </button>`;
+}
+
+async function postToLinkedIn(containerId) {
+  const text = document.getElementById("outBody")?.innerText || document.getElementById("previewText")?.innerText || "";
+  if (!text.trim()) { showToast("No post content!", "error"); return; }
+
+  const btn = document.getElementById("postBtn-" + containerId);
+  if (btn) { btn.disabled = true; btn.innerHTML = '<div class="spinner-w"></div> Posting...'; }
+  showToast("📤 Sending to LinkedIn...", "info");
+
+  try {
+    const res = await fetch("/api/post", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    const container = document.getElementById(containerId);
+    container.innerHTML = '<div class="btn-sent">✅ Posted to LinkedIn! Check your profile.</div>';
+    showToast("✅ Posted to LinkedIn successfully!", "success");
+  } catch(e) {
+    if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Post to LinkedIn Now'; }
+    showToast("❌ Failed: " + e.message, "error");
+  }
+}
+
+// ─── PREVIEW ───
+function renderPreview() {
+  const text = document.getElementById("outBody")?.innerText || "";
+  if (text.trim()) {
+    document.getElementById("previewEmpty").style.display = "none";
+    document.getElementById("previewContent").style.display = "block";
+    document.getElementById("previewText").textContent = text;
+    renderPostActions("previewPostActions");
+  } else {
+    document.getElementById("previewEmpty").style.display = "block";
+    document.getElementById("previewContent").style.display = "none";
+  }
+}
+
+// ─── BACKLOG ───
+function saveBacklog() {
+  localStorage.setItem("li_backlog_v3", JSON.stringify(backlog));
+  renderBacklog();
+}
+
+function updateSchedPreview() {
+  const d = document.getElementById("newDate").value;
+  const t = document.getElementById("newTime").value;
+  const el = document.getElementById("schedPreview");
+  el.textContent = d ? `📅 Will auto-post on ${fmtDate(new Date(d + "T" + t).toISOString())}` : "";
+}
+
+function addToBacklog() {
+  const topic = document.getElementById("newTopic").value.trim();
+  if (!topic) { showToast("Please enter a topic.", "error"); return; }
+  const date = document.getElementById("newDate").value;
+  const time = document.getElementById("newTime").value || "09:00";
+  const item = {
+    id: Date.now(), topic, tone: newTone, hook: newHook,
+    note: document.getElementById("newNote").value.trim(),
+    status: date ? "scheduled" : "pending",
+    scheduleAt: date ? new Date(date + "T" + time).toISOString() : null,
+    generatedPost: null, createdAt: new Date().toISOString()
+  };
+  backlog.unshift(item);
+  saveBacklog();
+  document.getElementById("newTopic").value = "";
+  document.getElementById("newNote").value = "";
+  document.getElementById("newDate").value = "";
+  document.getElementById("newTime").value = "09:00";
+  document.getElementById("schedPreview").textContent = "";
+  showToast(date ? `📅 Scheduled for ${fmtDate(item.scheduleAt)}` : "📋 Added to backlog!", "success");
+}
+
+async function generateFromBacklog(id) {
+  const item = backlog.find(b => b.id === id);
+  if (!item) return;
+  generatingId = id;
+  renderBacklog();
+
+  // Switch to generate tab and pre-fill
+  document.getElementById("topic").value = item.topic;
+  currentTone = item.tone;
+  currentHook = item.hook || "Bold statement";
+  renderTags("toneGroup", TONES, currentTone, v => { currentTone = v; renderTags("toneGroup", TONES, currentTone, arguments.callee); });
+  renderTags("hookGroup", HOOKS, currentHook, v => { currentHook = v; renderTags("hookGroup", HOOKS, currentHook, arguments.callee); });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn')[1].classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-generate').classList.add('active');
+
+  startLoading();
+  try {
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic: item.topic, tone: item.tone, hook: item.hook || "Bold statement", length: "medium", hashtags: "5", sfctx: "" })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    versions = [data.post]; currentVer = 0;
+    showOutput();
+
+    // Save back to backlog
+    const idx = backlog.findIndex(b => b.id === id);
+    if (idx >= 0) {
+      backlog[idx].generatedPost = data.post;
+      if (backlog[idx].scheduleAt) backlog[idx].status = "scheduled";
+      else backlog[idx].status = "done";
+      saveBacklog();
+    }
+  } catch(e) { showToast("❌ Error: " + e.message, "error"); }
+  finally { generatingId = null; stopLoading(); renderBacklog(); }
+}
+
+async function sendNow(id, isOverride) {
+  const item = backlog.find(b => b.id === id);
+  if (!item) return;
+
+  let text = item.generatedPost;
+  if (!text) {
+    showToast("✦ Generating post first...", "info");
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topic: item.topic, tone: item.tone, hook: item.hook || "Bold statement", length: "medium", hashtags: "5", sfctx: "" })
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      text = data.post;
+      const idx = backlog.findIndex(b => b.id === id);
+      if (idx >= 0) backlog[idx].generatedPost = text;
+    } catch(e) { showToast("❌ Generate failed: " + e.message, "error"); return; }
+  }
+
+  if (isOverride) showToast("📤 Overriding schedule — sending now...", "info");
+  else showToast("📤 Sending to LinkedIn...", "info");
+
+  try {
+    const res = await fetch("/api/post", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    const idx = backlog.findIndex(b => b.id === id);
+    if (idx >= 0) { backlog[idx].status = "sent"; backlog[idx].generatedPost = text; }
+    saveBacklog();
+    showToast(isOverride ? "✅ Sent! Schedule cancelled." : "✅ Posted to LinkedIn!", "success");
+  } catch(e) { showToast("❌ Send failed: " + e.message, "error"); }
+}
+
+function deleteItem(id) {
+  backlog = backlog.filter(b => b.id !== id);
+  saveBacklog();
+}
+
+function toggleExpand(id) {
+  expandedId = expandedId === id ? null : id;
+  renderBacklog();
+}
+
+function updateSchedule(id, date, time) {
+  const idx = backlog.findIndex(b => b.id === id);
+  if (idx < 0) return;
+  backlog[idx].scheduleAt = date ? new Date(date + "T" + (time||"09:00")).toISOString() : null;
+  backlog[idx].status = date ? (backlog[idx].generatedPost ? "scheduled" : "pending") : "pending";
+  saveBacklog();
+}
+
+function renderBacklog() {
+  const pending = backlog.filter(b => b.status === "pending").length;
+  const scheduled = backlog.filter(b => b.status === "scheduled").length;
+  const done = backlog.filter(b => b.status === "sent" || b.status === "done").length;
+
+  // Badge
+  const total = pending + scheduled;
+  const badge = document.getElementById("backlogBadge");
+  badge.style.display = total > 0 ? "inline-flex" : "none";
+  badge.textContent = total;
+
+  // Stats
+  document.getElementById("backlogStats").innerHTML =
+    `<span>📋 ${pending} pending</span><span>📅 ${scheduled} scheduled</span><span>✅ ${done} done</span>`;
+
+  // Update add button label
+  const addBtn = document.getElementById("addBtn");
+  if (addBtn) addBtn.textContent = document.getElementById("newDate")?.value ? "📅 Add & Schedule" : "+ Add to Backlog";
+
+  if (backlog.length === 0) {
+    document.getElementById("backlogList").innerHTML = '<div class="empty"><div style="font-size:2rem;margin-bottom:8px">📋</div><div>No topics yet — add your first idea above!</div></div>';
+    return;
+  }
+
+  document.getElementById("backlogList").innerHTML = backlog.map(item => {
+    const isDone = item.status === "sent" || item.status === "done";
+    const isExpanded = expandedId === item.id;
+    const isGenerating = generatingId === item.id;
+    const pillColor = STATUS_COLOR[item.status] || "#666";
+    const isScheduled = item.status === "scheduled";
+
+    return `
+      <div class="card ${isScheduled?'scheduled':''} ${isDone?'done':''}">
+        <div class="card-head">
+          <div style="flex:1" onclick="toggleExpand(${item.id})">
+            <div class="card-topic">${escHtml(item.topic)}</div>
+            <div class="card-meta">
+              <span class="pill" style="background:${pillColor}20;color:${pillColor};border:1px solid ${pillColor}40">${item.status}</span>
+              <span>${item.tone}</span>
+              ${item.scheduleAt ? `<span style="color:#4f8ef7">📅 ${fmtDate(item.scheduleAt)}</span>` : ""}
+              ${item.note ? `<span>· ${escHtml(item.note)}</span>` : ""}
+            </div>
+          </div>
+          <div class="card-acts">
+            ${!isDone ? `<button class="btn-purple" onclick="generateFromBacklog(${item.id})" ${isGenerating?'disabled':''}>
+              ${isGenerating ? '...' : '✦ Generate'}
+            </button>` : ""}
+            ${item.status !== "sent" && item.status !== "done" ? `
+              <button class="btn-green" onclick="sendNow(${item.id}, ${isScheduled})" style="${isScheduled?'border-color:#34d399;font-weight:700':''}">
+                ${isScheduled ? '▶ Send now (override)' : '▶ Send now'}
+              </button>` : ""}
+            <button class="btn-red" onclick="deleteItem(${item.id})">✕</button>
+          </div>
+        </div>
+        <div class="expanded ${isExpanded?'show':''}">
+          ${item.generatedPost
+            ? `<div class="generated-preview">${escHtml(item.generatedPost)}</div>`
+            : `<div style="font-size:0.72rem;color:#5a5a7a;margin-bottom:10px;font-style:italic">No post generated yet — click ✦ Generate</div>`
+          }
+          ${!isDone ? `
+            <div class="reschedule-box">
+              <label style="color:#4f8ef7;font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px;display:block">📅 Change schedule</label>
+              <div class="grid2">
+                <div><label>Date</label>
+                  <input type="date" style="color-scheme:dark;font-size:0.78rem" min="${TODAY}"
+                    value="${item.scheduleAt ? new Date(item.scheduleAt).toISOString().split('T')[0] : ''}"
+                    onchange="updateSchedule(${item.id}, this.value, document.getElementById('time-${item.id}')?.value)">
+                </div>
+                <div><label>Time</label>
+                  <input type="time" id="time-${item.id}" style="color-scheme:dark;font-size:0.78rem"
+                    value="${item.scheduleAt ? new Date(item.scheduleAt).toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit'}) : '09:00'}"
+                    onchange="updateSchedule(${item.id}, document.querySelector('[min=${TODAY}]')?.value, this.value)">
+                </div>
+              </div>
+            </div>` : ""}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ─── SCHEDULE TIMER ───
+function startScheduleTimer() {
+  setInterval(async () => {
+    const now = new Date();
+    let changed = false;
+    for (const item of backlog) {
+      if (item.status === "scheduled" && item.generatedPost && new Date(item.scheduleAt) <= now) {
+        try {
+          await fetch("/api/post", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: item.generatedPost }) });
+          item.status = "sent"; changed = true;
+        } catch { item.status = "failed"; changed = true; }
+      }
+    }
+    if (changed) { saveBacklog(); showToast("📬 Scheduled post sent to LinkedIn!", "success"); }
+  }, 60000);
+}
+
+// ─── UTILS ───
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-US", {month:"short",day:"numeric"}) + " " + d.toLocaleTimeString("en-US", {hour:"2-digit",minute:"2-digit"});
+}
+
+function escHtml(str) {
+  return (str||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+init();
+</script>
+</body>
+</html>
